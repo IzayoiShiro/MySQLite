@@ -25,4 +25,13 @@
         android:id="@+id/resolver"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="delete"
+        android:onClick="delete"
+        android:id="@+id/delete"
+        android:layout_below="@+id/resolver"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

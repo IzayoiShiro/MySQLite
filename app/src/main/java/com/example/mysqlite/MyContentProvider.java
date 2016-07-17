@@ -16,6 +16,8 @@ public class MyContentProvider extends ContentProvider {
     private static UriMatcher matcher = new UriMatcher(-1);
     static {
         matcher.addURI("com.example.mysqlite.personDB","query",1);
+        matcher.addURI("com.example.mysqlite.personDB","insert",2);
+        matcher.addURI("com.example.mysqlite.personDB","delete",3);
     }
 
     private MyOpenHelper helper;
@@ -48,11 +50,25 @@ public class MyContentProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(Uri uri, ContentValues contentValues) {
+        int result = matcher.match(uri);
+        if(result == 2){
+            SQLiteDatabase db = helper.getWritableDatabase();
+            db.insert("person",null,contentValues);
+        } else {
+            throw new IllegalArgumentException("路径不匹配，不能执行插入操作");
+        }
         return null;
     }
 
     @Override
     public int delete(Uri uri, String s, String[] strings) {
+        int result = matcher.match(uri);
+        if (result == 3){
+            SQLiteDatabase db = helper.getWritableDatabase();
+            db.delete("person",s,strings);
+        } else {
+            throw new IllegalArgumentException("路径不匹配，不能执行删除操作");
+        }
         return 0;
     }
 

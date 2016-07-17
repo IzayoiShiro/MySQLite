@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         init();
         setOnClickListener();
     }
-
     private void setOnClickListener() {
         insert_b.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,5 +59,10 @@ public class MainActivity extends AppCompatActivity {
         insert_b = (Button) findViewById(R.id.insert);
         resolver_b = (Button) findViewById(R.id.resolver);
         helper = new MyOpenHelper(this);
+    }
+
+    public void delete(View view) {
+        db = helper.getWritableDatabase();
+        db.delete("person",null,null);
     }
 }
